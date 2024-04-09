@@ -93,7 +93,10 @@ function dialog_redo.handle_callback(session, fields)
     local dialog = session.dialog_tree
     local current_id = session.current_id
     local callback_rtn = dialog[current_id].callback(session, fields)
-    if fields.quit == true or callback_rtn == nil or callback_rtn == "" then
+    if callback_rtn == nil or callback_rtn == "" then
+        -- Quit the dialog
+        -- elements wanting to respect fields.quit
+        -- must check themselves
         session:proper_terminate()
     elseif type(callback_rtn) == "string" then
         if callback_rtn == "self" then

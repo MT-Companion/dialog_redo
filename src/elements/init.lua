@@ -17,7 +17,6 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ]]
 
----@type { [string]: fun(params: table): DialogNode }
 dialog_redo.elements = {}
 
 local scripts = {

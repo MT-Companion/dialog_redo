@@ -28,6 +28,7 @@ local F = minetest.formspec_escape
 ---@field avatar? string Image to the avatar of the speaker
 ---@field name string The display name of the speaker
 ---@field text string The text to be diaplayed
+---@field allow_exit? boolean Whether to allow quitting. default: `false`
 ---@field buttons DialogChoicesOptions[]|fun(session: DialogSession): DialogChoicesOptions[] Table of buttons, of a function returning it.
 
 ---Build the formspec of buttons.
@@ -78,7 +79,7 @@ dialog_redo.elements.choices = function(params)
                 end
             end
 
-            return "formspec_version[6]" ..
+            local formspec = "formspec_version[6]" ..
                 "size[12,7.75]" ..
                 "position[0.5,0.95]" ..
                 "anchor[0.5,1]" ..
@@ -88,8 +89,19 @@ dialog_redo.elements.choices = function(params)
                 "label[0.5,2.75;".. F(params.name) .."]" ..
 		        "textarea[3.5,0.5;8,2;;;".. F(params.text) .."]" ..
                 build_buttons(session.choices_buttons)
+            if params.allow_exit then
+                formspec = formspec ..
+                    "image_button[11.5,0.25;0.25,0.25;dialog_redo_close.png;btn_close;;;false;]"
+            end
+            return formspec
         end,
         callback = function(session, fields)
+            if params.allow_exit then
+                if fields.quit == "true" or fields.btn_close then
+                    return ""
+                end
+            end
+
             local choices = session.choices_buttons
             local curr_choice
             for o = 1, #choices do

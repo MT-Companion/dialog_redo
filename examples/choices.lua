@@ -21,6 +21,7 @@ dialog_redo.register_dialog_tree("dialog_redo:example_choices", {
     init = dialog_redo.elements.choices({
         name = "Syetem 1",
         text = "Testing Choices text",
+        allow_exit = true,
         buttons = function()
             return {
                 {
