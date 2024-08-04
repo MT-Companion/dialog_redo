@@ -19,4 +19,8 @@
 
 ## License of media
 
-This work by 1F616EMO is licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+* `dialog_redo_close.png`: [CC0][CC0]
+  * Modified by 1F616EMO
+  * Modified from one of the [RPG UI Icons](https://opengameart.org/content/rpg-ui-icons), [OwlishMedia](https://opengameart.org/users/owlishmedia)
+
+[CC0]: https://creativecommons.org/publicdomain/zero/1.0/
