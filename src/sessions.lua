@@ -92,9 +92,15 @@ local session_indextable = {
 
 ---Create a new session for the player
 ---@param player_name string The name of the player
+---@param custom_session table Custom session fields
 ---@return DialogSession
-function dialog_redo.create_new_session(player_name)
+function dialog_redo.create_new_session(player_name, custom_session)
     local new_session = setmetatable({}, {__index = session_indextable})
+    for k, v in pairs(custom_session) do
+        if not session_indextable[k] then
+            new_session[k] = v
+        end
+    end
     new_session.player_name = player_name
     new_session.form_name = "dialog_redo:session_" .. player_name .. "_" .. tostring(os.time())
 

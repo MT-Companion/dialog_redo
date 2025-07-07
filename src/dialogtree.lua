@@ -68,7 +68,8 @@ end
 ---Start a dialog for the player
 ---@param player_name string
 ---@param dialog string|DialogTree If `DialogTree`, show that dialog; otherwise, find the given registered dialog.
-function dialog_redo.start_dialog(player_name, dialog)
+---@param custom_session table Custom session fields
+function dialog_redo.start_dialog(player_name, dialog, custom_session)
     if type(dialog) == "string" then
         local dialog_name = dialog
         dialog = dialog_redo.registered_dialog_trees[dialog]
@@ -79,7 +80,7 @@ function dialog_redo.start_dialog(player_name, dialog)
     if dialog["init"] == nil then
         error("Invalid dialog tree " .. dialog .. "without `init` node")
     end
-    local session = dialog_redo.create_new_session(player_name)
+    local session = dialog_redo.create_new_session(player_name, custom_session)
     session.dialog_tree = dialog
     session.current_id = "init"
 
